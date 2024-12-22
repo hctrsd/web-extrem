@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Descubre Aventuras Extremas: rafting, escalada y paracaidismo para los amantes de la adrenalina.">
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
+
+    <title>Aventuras Extremas - Deportes de Aventura</title>
+    <link rel="stylesheet" href="/Aventuras-extremas/styles.css">
+</head>
+<body>
+    <header class="header">
+  
+        <div>
+            <h1>Aventuras Extremas</h1>
+            <p>Descubre la adrenalina en cada aventura</p>
+           
+        </div>
+       
+    </header>
+    <nav class="navbar">
+        <ul class="menu">
+            <li><a href="#sobre-nosotros">Sobre Nosotros</a></li>
+            <li><a href="#informacion">Información</a></li>
+            <li><a href="#camping">Camping</a></li>
+        </ul>
+    </nav>
+    <section class="stories">
+        <h2>Nuestras Aventuras</h2>
+        <div class="story-grid">
+            <div class="story-card">
+                <img src="/Aventuras-extremas/images/preview.jpg" alt="Rafting">
+                <div class="story-content">
+                    <h3>Rafting Extremo</h3>
+                    <p>Experimenta la emoción de los rápidos más desafiantes en nuestras expediciones de rafting.</p>
+                </div>
+            </div>
+            <div class="story-card">
+                <img src="/Aventuras-extremas/images/preview1.jpg" alt="Escalada">
+                <div class="story-content">
+                    <h3>Escalada en Roca</h3>
+                    <p>Supera tus límites escalando las paredes más impresionantes bajo la guía de expertos.</p>
+                </div>
+            </div>
+            <div class="story-card">
+                <img src="/Aventuras-extremas/images/preview2.jpg" alt="Paracaidismo">
+                <div class="story-content">
+                    <h3>Paracaidismo</h3>
+                    <p>Siente la libertad absoluta cayendo desde las alturas con nuestro equipo profesional.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="signup" class="signup-section">
+        <div class="form-container">
+            <h2>¡Únete a la Aventura!</h2>
+            <div id="mensaje-container"></div>
+            <form id="signup-form">
+                <div class="form-group">
+                    <label for="nombre">Nombre Completo</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Correo Electrónico</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="telefono">Teléfono</label>
+                    <input type="tel" id="telefono" name="telefono">
+                </div>
+                <div class="form-group">
+                    <label for="actividad">Actividad de Interés</label>
+                    <select id="actividad" name="actividad" required>
+                        <option value="">Selecciona una actividad</option>
+                        <option value="rafting">Rafting</option>
+                        <option value="escalada">Escalada</option>
+                        <option value="paracaidismo">Paracaidismo</option>
+                    </select>
+                </div>
+                <button type="submit" class="submit-btn">Enviar Inscripción</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Aventuras Extremas</h3>
+                <p>Más de 10 años creando experiencias inolvidables</p>
+            </div>
+            <div class="footer-section">
+                <h3>Contacto</h3>
+                <p>📍 Av. Aventura 123, Ciudad Aventura</p>
+                <p>📞 +1 234 567 890</p>
+                <p>✉️ info@aventurasextremas.com</p>
+            </div>
+            <div class="footer-section">
+                <h3>Síguenos</h3>
+                <div class="social-links">
+                    <a href="#">Facebook</a>
+                    <a href="#">Instagram</a>
+                    <a href="#">Twitter</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+        // Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+export const firebaseConfig = {
+    apiKey: "AIzaSyBi11s3IXHCdQCRmyCw2T0ePrMV3G3crgQ",
+    authDomain: "aventuras-web.firebaseapp.com",
+    projectId: "aventuras-web",
+    storageBucket: "aventuras-web.firebasestorage.app",
+    messagingSenderId: "224412802051",
+    appId: "1:224412802051:web:a607c3d7ea525a74b6c236",
+    measurementId: "G-1HZ9EQYHB9"
+  };
+  
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+        document.getElementById('signup-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const datos = Object.fromEntries(formData.entries());
+            
+            // Simular envío de datos (aquí conectarías con tu backend real)
+            try {
+                // Simulación de envío exitoso
+                const mensajeContainer = document.getElementById('mensaje-container');
+                mensajeContainer.innerHTML = `
+                    <div class="mensaje exito">
+                        ¡Gracias por inscribirte! Te contactaremos pronto.
+                    </div>
+                `;
+                e.target.reset();
+                
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('mensaje-container').innerHTML = `
+                    <div class="mensaje error">
+                        Error al procesar la inscripción. Por favor, intenta nuevamente.
+                    </div>
+                `;
+            }
+        });
+        
+  
+    </script>
+</body>
+<script type="module" src="/Aventuras-extremas/scripts.js" defer></script> <!-- Archivo JS externo -->
+</html>
